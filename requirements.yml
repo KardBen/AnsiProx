@@ -1,0 +1,5 @@
+roles:
+  - name: docker_debian
+    src: https://github.com/KardBen/ansible-docker-debian.git
+    scm: git
+    version: main

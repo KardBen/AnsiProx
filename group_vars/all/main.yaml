@@ -1,0 +1,9 @@
+# Proxmox API and access vars
+proxmox_api_host: "{{ vault_proxmox_api_host }}"
+proxmox_api_user: "{{ vault_proxmox_api_user }}"
+proxmox_api_token_id: "{{ vault_proxmox_api_token_id }}"
+proxmox_api_token_secret: "{{ vault_proxmox_api_token_secret }}"
+proxmox_node: "{{ vault_proxmox_node }}"
+
+# VM-related vars
+cloud_init_sshkeys: "{{ vault_cloud_init_sshkeys }}"

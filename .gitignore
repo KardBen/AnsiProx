@@ -1,0 +1,9 @@
+/.vscode
+.vscode/
+/.ansible
+.ansible/
+*vault
+*/vault
+vaultpassword
+secrets.yaml
+hosts.yaml

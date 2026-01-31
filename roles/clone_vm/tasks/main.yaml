@@ -1,0 +1,35 @@
+# Deploy VM in Proxmox by Cloning from predefined VM Template
+###############################################################################################
+
+# Clone VM and set up cloud-init configuration
+- name: Clone VM
+  community.proxmox.proxmox_kvm:
+    api_host: "{{ proxmox_api_host }}"
+    api_user: "{{ proxmox_api_user }}"
+    api_token_id: "{{ proxmox_api_token_id }}"
+    api_token_secret: "{{ proxmox_api_token_secret }}"
+    node: "{{ proxmox_node }}"
+    clone: "{{ template_vm_name }}"
+    vmid: "{{ template_vm_id }}"
+    name: "{{ clone_vm_name }}"
+    newid: "{{ clone_vm_id }}"
+  delegate_to: localhost
+
+- name: Update VM configuration - Hardware and Cloud-Init
+  community.proxmox.proxmox_kvm:
+    api_host: "{{ proxmox_api_host }}"
+    api_user: "{{ proxmox_api_user }}"
+    api_token_id: "{{ proxmox_api_token_id }}"
+    api_token_secret: "{{ proxmox_api_token_secret }}"
+    node: "{{ proxmox_node }}"
+    name: "{{ clone_vm_name }}"
+    cores: "{{ clone_vm_cpu_cores }}"
+    memory: "{{ clone_vm_memory_size }}"
+    ciuser: "{{ cloud_init_user }}"
+    cipassword: "{{ cloud_init_password }}"
+    sshkeys: "{{ cloud_init_sshkeys }}"
+    nameservers: "{{ cloud_init_nameservers }}"
+    ipconfig:
+      ipconfig0: "{{ cloud_init_ipconfig }}"
+    update: true
+  delegate_to: localhost
