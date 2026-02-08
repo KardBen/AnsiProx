@@ -33,3 +33,29 @@
       ipconfig0: "{{ cloud_init_ipconfig }}"
     update: true
   delegate_to: localhost
+###############################################################################################
+
+# Resize VM disk according to needs
+- name: Grow VM disk
+  community.proxmox.proxmox_disk:
+    api_host: "{{ proxmox_api_host }}"
+    api_user: "{{ proxmox_api_user }}"
+    api_token_id: "{{ proxmox_api_token_id }}"
+    api_token_secret: "{{ proxmox_api_token_secret }}"
+    vmid: "{{ clone_vm_id }}"
+    disk: "{{ clone_vm_disk_identifier | default('scsi0') }}"
+    size: "{{ clone_vm_disk_resize_value | default('+100G') }}"
+    state: resized
+  delegate_to: localhost
+###############################################################################################
+
+- name: Start VM
+  community.proxmox.proxmox_kvm:
+    api_host: "{{ proxmox_api_host }}"
+    api_user: "{{ proxmox_api_user }}"
+    api_token_id: "{{ proxmox_api_token_id }}"
+    api_token_secret: "{{ proxmox_api_token_secret }}"
+    node: "{{ proxmox_node }}"
+    name: "{{ clone_vm_name }}"
+    state: started
+  delegate_to: localhost

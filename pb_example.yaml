@@ -14,6 +14,8 @@
     cloud_init_ipconfig: ip=192.168.1.123/24,gw=192.168.1.1
     cloud_init_nameservers:
       - 192.168.1.1
+    # clone_vm_disk_identifier
+    # clone_vm_disk_resize_value
 
   roles:
     - clone_vm
