@@ -1,17 +1,17 @@
 # AnsiProx
 An Ansible project that clones and provisions Proxmox VMs from a template using cloud-init.
 
-**What it does**
+## What it does
 Clones a template VM, applies CPU/memory and cloud-init settings, resizes the disk, and starts the VM. The core logic lives in `roles/clone_vm/tasks/main.yaml`.
 
-**Requirements**
+## Requirements
 - Ansible
 - Proxmox API access (user + API token)
 - Ansible collection `community.proxmox`
 - Python module `proxmoxer`
 - Python module `requests`
 
-**Setup**
+## Setup
 Install any galaxy roles listed in `requirements.yml`:
 ```bash
 make setup
@@ -22,7 +22,7 @@ Install the Proxmox collection (if you don't already have it):
 ansible-galaxy collection install community.proxmox
 ```
 
-**Configuration**
+## Configuration
 Inventory is in `hosts.yaml` (Proxmox host group). Example:
 ```yaml
 proxmox:
@@ -49,7 +49,7 @@ The example playbook `pb_example.yaml` shows the required and optional runtime v
 - Optional: `clone_vm_disk_identifier` (default `scsi0`)
 - Optional: `clone_vm_disk_resize_value` (default `+100G`)
 
-**Usage**
+## Usage
 Run the example playbook:
 ```bash
 ansible-playbook pb_example.yaml
